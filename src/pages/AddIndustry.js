@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import CREATE_PRODUCT from '../graphql/create_product.mutation';
+import CREATE_INDUSTRY from '../graphql/create_industry.mutation';
 import MySnackBar from '../components/MySnackBar'
 import Loading from '../components/Loading'
 
@@ -32,17 +32,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AddProduct() {
+export default function AddIndustry() {
   const classes = useStyles();
   const [name, setName] = React.useState("");
-  const [introduce, setIntroduce] = React.useState("");
+  const [desc, setDesc] = React.useState("");
   const [display, setDisplay] = React.useState("");
-  const [createProduct,{loading,error}] = useMutation(CREATE_PRODUCT,
+  const [createIndustry,{loading,error}] = useMutation(CREATE_INDUSTRY,
     {
         onCompleted() {
             setDisplay("success")
             setName("")
-            setIntroduce("")
+            setDesc("")
         }
     });
  if(loading) return <Loading />
@@ -53,8 +53,8 @@ export default function AddProduct() {
       <div className={classes.paper}>
     <form className={classes.form} noValidate autoComplete="off">
       <TextField
-        id="standard-name"
-        label="产品名称"
+        id="industry-name"
+        label="行业名称"
         className={classes.textField}
         value={name}
         fullWidth
@@ -62,12 +62,12 @@ export default function AddProduct() {
         margin="normal"
       />
       <TextField
-        id="standard-introduce"
-        label="产品介绍"
+        id="industry-desc"
+        label="行业描述"
         fullWidth
         className={classes.textField}
-        value={introduce}
-        onChange={(event)=>setIntroduce(event.target.value)}
+        value={desc}
+        onChange={(event)=>setDesc(event.target.value)}
         margin="normal"
         multiline
       />
@@ -75,7 +75,7 @@ export default function AddProduct() {
         color="primary" 
         fullWidth
         variant="contained"
-        onClick={()=>createProduct({variables:{name,introduce}})}
+        onClick={()=>createIndustry({variables:{name,desc}})}
         className={classes.button}>
             提交
             {loading && <Loading />}
@@ -83,7 +83,7 @@ export default function AddProduct() {
     </form>
     {display==="success" && 
     <MySnackBar 
-    message="产品创建成功"
+    message="行业创建成功"
     />}
     </div>
     </Container>

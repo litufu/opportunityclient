@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 import KEYWORD_FRAGMENT from './keyword.fragment'
 
-const INFLUENCE_FRAGMENT = gql`
-  fragment InfluenceFragment on Influence {
+const INDUSTRY_INFLUENCE_FRAGMENT = gql`
+  fragment IndustryInfluenceFragment on IndustryInfluence {
     id
     kind
     name
@@ -15,4 +15,4 @@ const INFLUENCE_FRAGMENT = gql`
  
  
 `
-export default INFLUENCE_FRAGMENT;
+export default INDUSTRY_INFLUENCE_FRAGMENT;

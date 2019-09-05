@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import INFLUENCE_FRAGMENT from './influence.fragment'
-import PRODUCT_FRAGMENT from './product.fragment'
+import INDUSTRY_FRAGMENT from './industry.fragment'
+import COMPANY_EVENT_FRAGMENT from './company_event.fragment'
 
 const COMPANY_FRAGMENT = gql`
   fragment CompanyFragment on Company {
@@ -20,19 +20,14 @@ const COMPANY_FRAGMENT = gql`
     isHS
     scope
     desc
-    influences{
-        ...InfluenceFragment
+    trades{
+        ...IndustryFragment
     }
-    purchases{
-        ...ProductFragment
-    }
-    selles{
-        ...ProductFragment
+    events{
+        ...CompanyEventFragment
     }
  }
- ${INFLUENCE_FRAGMENT}
- ${PRODUCT_FRAGMENT}
- ${PRODUCT_FRAGMENT}
- 
+ ${INDUSTRY_FRAGMENT}
+ ${COMPANY_EVENT_FRAGMENT}
 `
 export default COMPANY_FRAGMENT;

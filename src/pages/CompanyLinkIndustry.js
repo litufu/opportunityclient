@@ -5,15 +5,12 @@ import { useMutation } from '@apollo/react-hooks';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
+import SelectIndustry from '../components/SelectIndustry'
+import MyChips from '../components/MyChips'
 import SelectCompany from '../components/SelectCompany'
-import SelectProduct from '../components/SelectProduct'
 import MySnackBar from '../components/MySnackBar'
 import Loading from '../components/Loading'
-import PRODUCT_LINK_COMPANY from '../graphql/productLinkCompany.mutation'
+import COMPANY_LINK_INDUSTRY from '../graphql/companyLinkIndustry.mutation'
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +25,13 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+  },
+  chips: {
+    marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   button: {
     margin: theme.spacing(1),
@@ -44,18 +47,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TextFields() {
+export default function ProductLinkIndustry() {
   const classes = useStyles();
-  const [companyName, setCompanyName] = React.useState("");
-  const [deal, setDeal] = React.useState("sell");
-  const [productName, setProductName] = React.useState("");
+  const [industryName, setIndustryName] = React.useState("");
+  const [companyNames, setCompanyNames] = React.useState([]);
   const [display, setDisplay] = React.useState("");
-  const [productLinkCompany,{loading,error}] = useMutation(PRODUCT_LINK_COMPANY,
+  const [companyLinkIndustry,{loading,error}] = useMutation(COMPANY_LINK_INDUSTRY,
     {
         onCompleted() {
             setDisplay("success")
-            setCompanyName("")
-            setProductName("")
+            setIndustryName("")
+            setCompanyNames([])
         }
     });
  if(loading) return <Loading />
@@ -64,41 +66,42 @@ export default function TextFields() {
   return (
     <Container component="main" className={classes.container}>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          录入公司产品
-        </Typography>
+        <SelectIndustry
+        handleSelect={(value)=>setIndustryName(value)}
+      />
       <SelectCompany 
-        handleSelect={(value)=>setCompanyName(value)}
+        handleSelect={(value)=>setCompanyNames([...companyNames,value])}
       />
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-simple">Age</InputLabel>
-        <Select
-          value={deal}
-          onChange={(event)=>setDeal(event.target.value)}
-          inputProps={{
-            name: 'deal',
-            id: 'deal-simple',
-          }}
-        >
-          <MenuItem value="sell">销售</MenuItem>
-          <MenuItem value="purchase">购买</MenuItem>
-        </Select>
-      </FormControl>
-      <SelectProduct
-        handleSelect={(value)=>setProductName(value)}
-      />
+      {
+          companyNames.length>0 && (
+              <div >
+            <Typography  variant="h6">
+                拟添加的公司：
+              </Typography>
+              <MyChips
+            values={companyNames}
+            handleDelete={(deleteName)=>{
+                const newCompanyNames = companyNames.filter(companyName=>companyName!==deleteName)
+                setCompanyNames(newCompanyNames)
+            }}
+            />
+            </div>)
+      }
+     
+      
+     
         <Button 
         color="primary" 
         fullWidth
         variant="contained"
-        onClick={()=>productLinkCompany({variables:{companyName,productName,deal}})}
+        onClick={()=>companyLinkIndustry({variables:{companyNames,industryName}})}
         className={classes.button}>
             提交
         </Button>
     </div>
     {display==="success" && 
     <MySnackBar 
-    message="产品与公司关联成功"
+    message="公司与行业关联成功"
     />}
     </Container>
   );

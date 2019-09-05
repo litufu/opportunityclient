@@ -17,7 +17,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import AddProduct from './AddProduct'
-import ProductLinkCompany from './ProductLinkCompany'
+import AddIndustry from './AddIndustry'
+import ProductLinkIndustry from './ProductLinkIndustry'
+import CompanyLinkIndustry from './CompanyLinkIndustry'
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 
 const drawerWidth = 240;
@@ -143,20 +145,37 @@ export default function Company() {
               <ListItemIcon>
                  <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="添加产品" />
+              <ListItemText primary="添加产品或服务" />
             </ListItem>
             <ListItem
              button
-             onClick={()=>setDisplay("productLinkCompany")}
+             onClick={()=>setDisplay("addIndustry")}
              >
               <ListItemIcon> 
                   <InboxIcon />
              </ListItemIcon>
-              <ListItemText primary="公司产品及服务" />
+              <ListItemText primary="创建行业" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("productLinkIndustry")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="行业产品及服务" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("companyLinkIndustry")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="行业和公司" />
             </ListItem>
         </List>
         <Divider />
-  
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -199,9 +218,21 @@ export default function Company() {
                 />
             )
         }
+           {
+            display==="addIndustry" && (
+                <AddIndustry 
+                />
+            )
+        }
         {
-            display==="productLinkCompany" && (
-                <ProductLinkCompany 
+            display==="productLinkIndustry" && (
+                <ProductLinkIndustry 
+                />
+            )
+        }
+        {
+            display==="companyLinkIndustry" && (
+                <CompanyLinkIndustry 
                 />
             )
         }
