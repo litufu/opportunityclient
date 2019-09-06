@@ -20,6 +20,7 @@ import AddProduct from './AddProduct'
 import AddIndustry from './AddIndustry'
 import ProductLinkIndustry from './ProductLinkIndustry'
 import CompanyLinkIndustry from './CompanyLinkIndustry'
+import IndustryResearch from './IndustryResearch'
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
 
 const drawerWidth = 240;
@@ -174,6 +175,15 @@ export default function Company() {
              </ListItemIcon>
               <ListItemText primary="行业和公司" />
             </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("industryResearch")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="行业研究" />
+            </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -233,6 +243,12 @@ export default function Company() {
         {
             display==="companyLinkIndustry" && (
                 <CompanyLinkIndustry 
+                />
+            )
+        }
+        {
+            display==="industryResearch" && (
+                <IndustryResearch 
                 />
             )
         }
