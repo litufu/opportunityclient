@@ -4,7 +4,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
-
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -17,7 +16,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SearchCompany from './SearchCompany'
-import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import SearchCompanyByInfluence from './SearchCompanyByInfluence'
+import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
 
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Company() {
+export default function Main() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -139,12 +139,22 @@ export default function Company() {
              button
              onClick={()=>setDisplay("searchCompany")}
              >
-              <ListItemIcon> <InboxIcon /> </ListItemIcon>
-              <ListItemText primary="查找公司" />
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="关键词查询" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("searchCompanyByInfluence")}
+             >
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="关键要素波动查询" />
             </ListItem>
         </List>
         <Divider />
-  
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -184,7 +194,12 @@ export default function Company() {
         {
             display==="searchCompany" && (
                 <SearchCompany 
-                
+                />
+            )
+        }
+        {
+            display==="searchCompanyByInfluence" && (
+                <SearchCompanyByInfluence 
                 />
             )
         }

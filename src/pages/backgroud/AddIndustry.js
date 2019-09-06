@@ -1,18 +1,12 @@
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/react-hooks';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import SelectIndustry from '../components/SelectIndustry'
-import TextField from '@material-ui/core/TextField';
-import MySnackBar from '../components/MySnackBar'
-import Loading from '../components/Loading'
-import INDUSTRY_RESEARCH from '../graphql/industryResearch.mutation'
+import CREATE_INDUSTRY from '../../graphql/create_industry.mutation';
+import MySnackBar from '../../components/MySnackBar'
+import Loading from '../../components/Loading'
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +16,6 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width:500,
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -32,26 +25,24 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
-    width:510
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  
 }));
 
-export default function ProductLinkIndustry() {
+export default function AddIndustry() {
   const classes = useStyles();
-  const [industryName, setIndustryName] = React.useState("");
-  const [research, setResearch] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [desc, setDesc] = React.useState("");
   const [display, setDisplay] = React.useState("");
-  const [industryResearch,{loading,error}] = useMutation(INDUSTRY_RESEARCH,
+  const [createIndustry,{loading,error}] = useMutation(CREATE_INDUSTRY,
     {
         onCompleted() {
             setDisplay("success")
-            setIndustryName("")
-            setResearch("")
+            setName("")
+            setDesc("")
         }
     });
  if(loading) return <Loading />
@@ -60,15 +51,23 @@ export default function ProductLinkIndustry() {
   return (
     <Container component="main" className={classes.container}>
       <div className={classes.paper}>
-      <SelectIndustry 
-        handleSelect={(value)=>setIndustryName(value)}
+    <form className={classes.form} noValidate autoComplete="off">
+      <TextField
+        id="industry-name"
+        label="行业名称"
+        className={classes.textField}
+        value={name}
+        fullWidth
+        onChange={(event)=>setName(event.target.value)}
+        margin="normal"
       />
       <TextField
         id="industry-desc"
-        label="行业研究"
+        label="行业描述"
+        fullWidth
         className={classes.textField}
-        value={research}
-        onChange={(event)=>setResearch(event.target.value)}
+        value={desc}
+        onChange={(event)=>setDesc(event.target.value)}
         margin="normal"
         multiline
       />
@@ -76,15 +75,17 @@ export default function ProductLinkIndustry() {
         color="primary" 
         fullWidth
         variant="contained"
-        onClick={()=>industryResearch({variables:{industryName,research}})}
+        onClick={()=>createIndustry({variables:{name,desc}})}
         className={classes.button}>
             提交
+            {loading && <Loading />}
         </Button>
-    </div>
+    </form>
     {display==="success" && 
     <MySnackBar 
-    message="行业研究添加成功"
+    message="行业创建成功"
     />}
+    </div>
     </Container>
   );
 }

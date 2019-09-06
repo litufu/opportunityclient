@@ -21,7 +21,9 @@ import AddIndustry from './AddIndustry'
 import ProductLinkIndustry from './ProductLinkIndustry'
 import CompanyLinkIndustry from './CompanyLinkIndustry'
 import IndustryResearch from './IndustryResearch'
-import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import AddKeyword from './AddKeyword'
+import IndustryInfluence from './IndustryInfluence'
+import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
 
@@ -184,6 +186,24 @@ export default function Company() {
              </ListItemIcon>
               <ListItemText primary="行业研究" />
             </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("addKeyword")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="添加关键因素" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("industryInfluence")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="行业关键影响因素" />
+            </ListItem>
         </List>
         <Divider />
       </Drawer>
@@ -249,6 +269,18 @@ export default function Company() {
         {
             display==="industryResearch" && (
                 <IndustryResearch 
+                />
+            )
+        }
+        {
+            display==="addKeyword" && (
+                <AddKeyword 
+                />
+            )
+        }
+        {
+            display==="industryInfluence" && (
+                <IndustryInfluence 
                 />
             )
         }

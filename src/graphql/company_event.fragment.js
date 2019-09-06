@@ -10,7 +10,7 @@ const COMPANY_EVENT_FRAGMENT = gql`
     happenTime
     influence
     kind
-    dierction
+    direction
  }
  
  

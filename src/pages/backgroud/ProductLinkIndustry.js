@@ -8,11 +8,11 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import SelectIndustry from '../components/SelectIndustry'
-import SelectProduct from '../components/SelectProduct'
-import MySnackBar from '../components/MySnackBar'
-import Loading from '../components/Loading'
-import PRODUCT_LINK_INDUSTRY from '../graphql/productLinkIndustry.mutation'
+import SelectIndustry from '../../components/SelectIndustry'
+import SelectProduct from '../../components/SelectProduct'
+import MySnackBar from '../../components/MySnackBar'
+import Loading from '../../components/Loading'
+import PRODUCT_LINK_INDUSTRY from '../../graphql/productLinkIndustry.mutation'
 
 
 const useStyles = makeStyles(theme => ({

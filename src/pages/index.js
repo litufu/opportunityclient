@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Router } from '@reach/router';
 import Container from '@material-ui/core/Container';
-import Main from './Main'
-import Company from './Company'
-import BackStage from './BackStage'
+import Main from './main/Main'
+import Company from './company/Company'
+import BackStage from './backgroud/BackStage'
 
 
 

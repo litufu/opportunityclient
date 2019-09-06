@@ -5,10 +5,10 @@ const INDUSTRY_INFLUENCE_FRAGMENT = gql`
   fragment IndustryInfluenceFragment on IndustryInfluence {
     id
     kind
-    name
     desc
-    dierction
-    keywords{
+    direction
+    keywordDirection
+    keyword{
         ...KeywordFragment
     }
  }${KEYWORD_FRAGMENT}

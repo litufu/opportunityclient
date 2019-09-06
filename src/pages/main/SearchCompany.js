@@ -7,9 +7,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import SearchBar from '../components/SearchBar'
-import Loading from '../components/Loading'
-import GET_COMPANIES from '../graphql/get_companies.query'
+import SearchBar from '../../components/SearchBar'
+import Loading from '../../components/Loading'
+import GET_COMPANIES from '../../graphql/get_companies.query';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchCompany(){
     const [searchText, setSearchText] = React.useState("");
-    const [getCompanies, { loading,error, data }] = useLazyQuery(GET_COMPANIES);
+    const [companies, { loading,error, data }] = useLazyQuery(GET_COMPANIES);
     
     if (loading) return <Loading />;
     if (error) return <div>{error.message}</div>;
@@ -33,17 +33,16 @@ export default function SearchCompany(){
     return(
         <Fragment>
             <SearchBar 
-            placeholder="根据关键词查找相关公司"
-            inputValue={searchText}
-            handleInputValue={(event)=>setSearchText(event.target.value)}
-            search={()=>getCompanies({ variables: { keyword:searchText } })}
+              placeholder="根据关键词查找相关公司"
+              inputValue={searchText}
+              handleInputValue={(event)=>setSearchText(event.target.value)}
+              search={()=>companies({ variables: { keyword:searchText } })}
             />
             {(data && data.companies) && (
                 <SimpleTable 
                     companies={data.companies}
                 />)
             }
-            
         </Fragment>
     )
 }

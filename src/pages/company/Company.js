@@ -16,8 +16,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import SearchCompany from './SearchCompany'
-import Toolbar, { styles as toolbarStyles } from '../components/Toolbar';
+import SearchCompany from '../main/SearchCompany'
+import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
 
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Main() {
+export default function Company() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -139,9 +139,7 @@ export default function Main() {
              button
              onClick={()=>setDisplay("searchCompany")}
              >
-              <ListItemIcon>
-                  <InboxIcon />
-              </ListItemIcon>
+              <ListItemIcon> <InboxIcon /> </ListItemIcon>
               <ListItemText primary="查找公司" />
             </ListItem>
         </List>

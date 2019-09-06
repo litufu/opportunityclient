@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const KEYWORD_FRAGMENT = gql`
-  fragment KeywordFragment on KeyWord {
+  fragment KeywordFragment on Keyword {
     id
     name
  }

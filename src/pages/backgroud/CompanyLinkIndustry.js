@@ -5,12 +5,12 @@ import { useMutation } from '@apollo/react-hooks';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import SelectIndustry from '../components/SelectIndustry'
-import MyChips from '../components/MyChips'
-import SelectCompany from '../components/SelectCompany'
-import MySnackBar from '../components/MySnackBar'
-import Loading from '../components/Loading'
-import COMPANY_LINK_INDUSTRY from '../graphql/companyLinkIndustry.mutation'
+import SelectIndustry from '../../components/SelectIndustry'
+import MyChips from '../../components/MyChips'
+import SelectCompany from '../../components/SelectCompany'
+import MySnackBar from '../../components/MySnackBar'
+import Loading from '../../components/Loading'
+import COMPANY_LINK_INDUSTRY from '../../graphql/companyLinkIndustry.mutation'
 
 
 const useStyles = makeStyles(theme => ({
