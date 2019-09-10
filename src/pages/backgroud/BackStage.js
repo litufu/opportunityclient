@@ -17,12 +17,15 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import AddProduct from './AddProduct'
+import AddCompanyProduct from './AddCompanyProduct'
 import AddIndustry from './AddIndustry'
 import ProductLinkIndustry from './ProductLinkIndustry'
+import ProductLinkCompany from './ProductLinkCompany'
 import CompanyLinkIndustry from './CompanyLinkIndustry'
 import IndustryResearch from './IndustryResearch'
 import AddKeyword from './AddKeyword'
 import IndustryInfluence from './IndustryInfluence'
+import AddCompanyComment from './AddCompanyComment'
 import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
@@ -148,7 +151,16 @@ export default function Company() {
               <ListItemIcon>
                  <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="添加产品或服务" />
+              <ListItemText primary="添加行业标准产品" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("addCompanyProduct")}
+             >
+              <ListItemIcon>
+                 <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="添加公司级产品" />
             </ListItem>
             <ListItem
              button
@@ -167,6 +179,15 @@ export default function Company() {
                   <InboxIcon />
              </ListItemIcon>
               <ListItemText primary="行业产品及服务" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("productLinkCompany")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="公司产品及服务" />
             </ListItem>
             <ListItem
              button
@@ -203,6 +224,15 @@ export default function Company() {
                   <InboxIcon />
              </ListItemIcon>
               <ListItemText primary="行业关键影响因素" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("companyComment")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="公司评价" />
             </ListItem>
         </List>
         <Divider />
@@ -248,6 +278,12 @@ export default function Company() {
                 />
             )
         }
+        {
+            display==="addCompanyProduct" && (
+                <AddCompanyProduct 
+                />
+            )
+        }
            {
             display==="addIndustry" && (
                 <AddIndustry 
@@ -257,6 +293,12 @@ export default function Company() {
         {
             display==="productLinkIndustry" && (
                 <ProductLinkIndustry 
+                />
+            )
+        }
+        {
+            display==="productLinkCompany" && (
+                <ProductLinkCompany 
                 />
             )
         }
@@ -281,6 +323,12 @@ export default function Company() {
         {
             display==="industryInfluence" && (
                 <IndustryInfluence 
+                />
+            )
+        }
+         {
+            display==="companyComment" && (
+                <AddCompanyComment 
                 />
             )
         }

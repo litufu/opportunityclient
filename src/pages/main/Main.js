@@ -17,6 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SearchCompany from './SearchCompany'
 import SearchCompanyByInfluence from './SearchCompanyByInfluence'
+import InfluenceList from './InfluenceList'
 import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
@@ -151,7 +152,16 @@ export default function Main() {
               <ListItemIcon>
                   <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="关键要素波动查询" />
+              <ListItemText primary="驱动要素波动查询" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("InfluenceList")}
+             >
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="关键驱动因素列表" />
             </ListItem>
         </List>
         <Divider />
@@ -200,6 +210,12 @@ export default function Main() {
         {
             display==="searchCompanyByInfluence" && (
                 <SearchCompanyByInfluence 
+                />
+            )
+        }
+        {
+            display==="InfluenceList" && (
+                <InfluenceList 
                 />
             )
         }

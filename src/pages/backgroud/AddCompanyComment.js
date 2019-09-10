@@ -1,12 +1,14 @@
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useMutation } from '@apollo/react-hooks';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import CREATE_PRODUCT from '../../graphql/create_product.mutation';
+import SelectCompany from '../../components/SelectCompany'
+import TextField from '@material-ui/core/TextField';
 import MySnackBar from '../../components/MySnackBar'
 import Loading from '../../components/Loading'
+import ADD_COMPANY_COMMENT from '../../graphql/add_company_comment'
 
 
 const useStyles = makeStyles(theme => ({
@@ -16,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
+    width:500,
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -25,24 +28,26 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     margin: theme.spacing(1),
+    width:510
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
+  
 }));
 
-export default function AddProduct() {
+export default function ProductLinkIndustry() {
   const classes = useStyles();
-  const [name, setName] = React.useState("");
-  const [introduce, setIntroduce] = React.useState("");
+  const [companyName, setCompanyName] = React.useState("");
+  const [comment, setComment] = React.useState("");
   const [display, setDisplay] = React.useState("");
-  const [createProduct,{loading,error}] = useMutation(CREATE_PRODUCT,
+  const [addCompanyComment,{loading,error}] = useMutation(ADD_COMPANY_COMMENT,
     {
         onCompleted() {
             setDisplay("success")
-            setName("")
-            setIntroduce("")
+            setCompanyName("")
+            setComment("")
         }
     });
  if(loading) return <Loading />
@@ -51,23 +56,15 @@ export default function AddProduct() {
   return (
     <Container component="main" className={classes.container}>
       <div className={classes.paper}>
-    <form className={classes.form} noValidate autoComplete="off">
-      <TextField
-        id="standard-name"
-        label="行业通用产品名称"
-        className={classes.textField}
-        value={name}
-        fullWidth
-        onChange={(event)=>setName(event.target.value)}
-        margin="normal"
+      <SelectCompany 
+        handleSelect={(value)=>setCompanyName(value)}
       />
       <TextField
-        id="standard-introduce"
-        label="行业通用产品介绍"
-        fullWidth
+        id="industry-desc"
+        label="公司评价"
         className={classes.textField}
-        value={introduce}
-        onChange={(event)=>setIntroduce(event.target.value)}
+        value={comment}
+        onChange={(event)=>setComment(event.target.value)}
         margin="normal"
         multiline
       />
@@ -75,17 +72,15 @@ export default function AddProduct() {
         color="primary" 
         fullWidth
         variant="contained"
-        onClick={()=>createProduct({variables:{name,introduce}})}
+        onClick={()=>addCompanyComment({variables:{companyName,comment}})}
         className={classes.button}>
             提交
-            {loading && <Loading />}
         </Button>
-    </form>
+    </div>
     {display==="success" && 
     <MySnackBar 
-    message="产品创建成功"
+    message="公司评价添加成功"
     />}
-    </div>
     </Container>
   );
 }

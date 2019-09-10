@@ -1,5 +1,6 @@
 import React,{Fragment} from 'react'
 import { useLazyQuery } from '@apollo/react-hooks';
+import { navigate } from "@reach/router"
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -68,7 +69,7 @@ function SimpleTable(props) {
           {props.companies.map(company => (
             <TableRow 
             key={company.name}
-            onClick={()=>alert(company.name)}
+            onClick={()=>navigate(`/company/${company.symbol}`)}
             >
               <TableCell component="th" scope="row">
                 {company.symbol}
