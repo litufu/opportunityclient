@@ -1,13 +1,6 @@
 import React,{Fragment} from 'react'
 import { useLazyQuery } from '@apollo/react-hooks';
-import { navigate } from "@reach/router"
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Loading from '../../components/Loading'
 import SelectKeyword from '../../components/SelectKeyword'
 import FormControl from '@material-ui/core/FormControl';
@@ -15,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
+import CompanyTable from '../../components/CompanyTable'
 import GET_COMPANIES_BY_INDUSTRY_INFLUENCE from '../../graphql/get_companies_by_industry_influence.query';
 
 
@@ -91,49 +85,10 @@ export default function SearchCompanyByInfluence(){
             </Button>
             </div>
             {(data && data.companiesByInfluence.length>0) && (
-                <SimpleTable 
+                <CompanyTable 
                     companies={data.companiesByInfluence}
                 />)
             }
         </Fragment>
     )
-}
-
-
-function SimpleTable(props) {
-  const classes = useStyles();
-
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>股票代码</TableCell>
-            <TableCell align="right">公司简称</TableCell>
-            <TableCell align="right">所属行业</TableCell>
-            <TableCell align="right">上市日期</TableCell>
-            <TableCell align="right">所在地域</TableCell>
-            <TableCell align="right">是否沪深港通标的</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.companies.map(company => (
-            <TableRow 
-            key={company.name}
-            onClick={()=>navigate(`/company/${company.symbol}`)}
-            >
-              <TableCell component="th" scope="row">
-                {company.symbol}
-              </TableCell>
-              <TableCell align="right">{company.name}</TableCell>
-              <TableCell align="right">{company.industry}</TableCell>
-              <TableCell align="right">{company.listDate}</TableCell>
-              <TableCell align="right">{company.area}</TableCell>
-              <TableCell align="right">{company.isHS}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
 }
