@@ -155,6 +155,15 @@ export default function Company(props) {
             </ListItem>
             <ListItem
              button
+             onClick={()=>setDisplay("industry")}
+             >
+              <ListItemIcon>
+                 <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="行业研究" />
+            </ListItem>
+            <ListItem
+             button
              onClick={()=>setDisplay("influence")}
              >
               <ListItemIcon>
@@ -202,8 +211,10 @@ export default function Company(props) {
         {
             display==="main" && (
                 <Fragment>
-                  {data.company.comments.map(comment=>(
-                    <Typography paragraph>
+                  {data.company.comments.map((comment)=>(
+                    <Typography
+                    key={comment.id}
+                    paragraph >
                      {dateToString(new Date(comment.createTime))}: {comment.desc}
                       </Typography>
                   ))}
@@ -224,6 +235,26 @@ export default function Company(props) {
          <Typography>
            {data.company.desc}
          </Typography>
+        )
+      }
+      {
+        display==="industry" && (
+         <div>
+           {data.company.trades.map((industry)=>(
+             <Fragment key={industry.id}>
+                  <div>
+                    {`${industry.name}:`}
+                    </div>
+                    <div>{industry.desc}
+                  </div>
+                  {industry.researches.map((research,index)=>(
+                    <div key={research.id}>
+                      {index+1} ---- {research.desc}
+                    </div>
+                  ))}
+               </Fragment>
+           ))}
+         </div>
         )
       }
       </main>
