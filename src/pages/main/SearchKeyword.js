@@ -3,12 +3,12 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import SearchBar from '../../components/SearchBar'
 import Loading from '../../components/Loading'
 import CompanyTable from '../../components/CompanyTable'
-import GET_COMPANIES_BY_CODE_OR_NAME from '../../graphql/get_companies_by_code_or_name.query'
+import GET_COMPANIES from '../../graphql/get_companies.query';
 
 
-export default function SearchCompany(){
+export default function SearchKeyword(){
     const [searchText, setSearchText] = React.useState("");
-    const [companiesByCodeOrName, { loading,error, data }] = useLazyQuery(GET_COMPANIES_BY_CODE_OR_NAME);
+    const [companies, { loading,error, data }] = useLazyQuery(GET_COMPANIES);
     
     if (loading) return <Loading />;
     if (error) return <div>{error.message}</div>;
@@ -19,11 +19,11 @@ export default function SearchCompany(){
               placeholder="根据关键词查找相关公司"
               inputValue={searchText}
               handleInputValue={(event)=>setSearchText(event.target.value)}
-              search={()=>companiesByCodeOrName({ variables: { inputvalue:searchText } })}
+              search={()=>companies({ variables: { keyword:searchText } })}
             />
-            {(data && data.companiesByCodeOrName) && (
+            {(data && data.companies) && (
                 <CompanyTable 
-                    companies={data.companiesByCodeOrName}
+                    companies={data.companies}
                 />)
             }
         </Fragment>

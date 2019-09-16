@@ -1,23 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import Downshift from 'downshift';
 import {useQuery} from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-
-
-export const GET_COMPANIES_BY_CODE_OR_NAME = gql`
-  query CompaniesByCodeOrName($inputvalue: String!) {
-    companiesByCodeOrName(inputvalue: $inputvalue){
-      id
-      name
-      symbol
-    }
-  }
-`;
+import GET_COMPANIES_BY_CODE_OR_NAME from '../graphql/get_companies_by_code_or_name.query'
 
 
 function renderInput(inputProps) {

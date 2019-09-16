@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import gql from "graphql-tag";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,8 +20,37 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Loading from '../../components/Loading'
 import Influences from './Influences'
 import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
-import GET_COMPANY from '../../graphql/company.query'
+import COMPANY_FRAGMENT from '../../graphql/company.fragment'
+import INDUSTRY_FRAGMENT from '../../graphql/industry.fragment'
+import COMMENT_FRAGMENT from '../../graphql/comment.fragment'
+import DAILY_FRAGMENT from '../../graphql/daily.fragment'
 import {dateToString} from '../../utils'
+import Performence from './Performence'
+
+const GET_COMPANY = gql`
+query Company(
+  $symbol:String!
+){
+    company(
+        symbol:$symbol
+      ){
+      ...CompanyFragment
+      comments{
+        ...CommentFragment
+      }
+      trades{
+        ...IndustryFragment
+      }
+      dailies{
+        ...DailyFragment
+      }
+    }
+}
+${COMPANY_FRAGMENT}
+${COMMENT_FRAGMENT}
+${INDUSTRY_FRAGMENT}
+${DAILY_FRAGMENT}
+`
 
 const drawerWidth = 240;
 
@@ -198,6 +228,15 @@ export default function Company(props) {
               </ListItemIcon>
               <ListItemText primary="业绩预测" />
             </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("Performence")}
+             >
+              <ListItemIcon>
+                 <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="公司业绩" />
+            </ListItem>
         </List>
         <Divider />
   
@@ -237,6 +276,13 @@ export default function Company(props) {
          </Typography>
         )
       }
+       {
+        display==="Performence" && (
+         <Performence
+         code={data.company.symbol}
+         />
+        )
+      }
       {
         display==="industry" && (
          <div>
@@ -257,6 +303,7 @@ export default function Company(props) {
          </div>
         )
       }
+     
       </main>
     </div>
   );

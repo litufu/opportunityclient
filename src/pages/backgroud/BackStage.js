@@ -26,6 +26,7 @@ import IndustryResearch from './IndustryResearch'
 import AddKeyword from './AddKeyword'
 import IndustryInfluence from './IndustryInfluence'
 import AddCompanyComment from './AddCompanyComment'
+import Operation from './Operation'
 import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
 
 const drawerWidth = 240;
@@ -144,6 +145,15 @@ export default function Company() {
         </div>
         <Divider />
         <List>
+        <ListItem
+             button
+             onClick={()=>setDisplay("operation")}
+             >
+              <ListItemIcon> 
+                  <InboxIcon />
+             </ListItemIcon>
+              <ListItemText primary="操作平台" />
+            </ListItem>
             <ListItem
              button
              onClick={()=>setDisplay("addProduct")}
@@ -234,6 +244,7 @@ export default function Company() {
              </ListItemIcon>
               <ListItemText primary="公司评价" />
             </ListItem>
+            
         </List>
         <Divider />
       </Drawer>
@@ -329,6 +340,12 @@ export default function Company() {
          {
             display==="companyComment" && (
                 <AddCompanyComment 
+                />
+            )
+        }
+        {
+            display==="operation" && (
+                <Operation 
                 />
             )
         }

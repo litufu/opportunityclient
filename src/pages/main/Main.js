@@ -15,10 +15,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import SearchKeyword from './SearchKeyword'
 import SearchCompany from './SearchCompany'
 import News from './News'
 import BottomCross from './BottomCross'
 import BottomVolume from './BottomVolume'
+import ConditonSearch from './ConditonSearch'
 import SearchCompanyByInfluence from './SearchCompanyByInfluence'
 import InfluenceList from './InfluenceList'
 import Toolbar, { styles as toolbarStyles } from '../../components/Toolbar';
@@ -150,12 +152,21 @@ export default function Main() {
             </ListItem>
             <ListItem
              button
-             onClick={()=>setDisplay("searchCompany")}
+             onClick={()=>setDisplay("searchKeyword")}
              >
               <ListItemIcon>
                   <InboxIcon />
               </ListItemIcon>
               <ListItemText primary="关键词查询" />
+            </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("searchCompany")}
+             >
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="公司查询" />
             </ListItem>
             <ListItem
              button
@@ -196,6 +207,15 @@ export default function Main() {
               </ListItemIcon>
               <ListItemText primary="底部放量星股票" />
             </ListItem>
+            <ListItem
+             button
+             onClick={()=>setDisplay("listYears")}
+             >
+              <ListItemIcon>
+                  <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="公司上市年限查询" />
+            </ListItem>
         </List>
       </Drawer>
       <main
@@ -207,6 +227,12 @@ export default function Main() {
         {
             display==="news" && (
               <News />
+            )
+        }
+        {
+            display==="searchKeyword" && (
+                <SearchKeyword 
+                />
             )
         }
         {
@@ -236,6 +262,12 @@ export default function Main() {
         {
             display==="BottomVolume" && (
                 <BottomVolume
+                />
+            )
+        }
+         {
+            display==="listYears" && (
+                <ConditonSearch
                 />
             )
         }
