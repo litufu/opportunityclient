@@ -6,11 +6,13 @@ const GET_CONDITION_SEARCH_COMPANIES = gql`
       $years:Int
       $qSalesYoy:Float
       $dtNetprofitYoy:Float
+      $endDate:String
     ){
       conditionSearchCompanies(
             years:$years
             qSalesYoy:$qSalesYoy,
             dtNetprofitYoy:$dtNetprofitYoy
+            endDate:$endDate
           ){
           ...CompanyFragment
         }

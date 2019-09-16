@@ -214,7 +214,7 @@ export default function Main() {
               <ListItemIcon>
                   <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="公司上市年限查询" />
+              <ListItemText primary="财务指标搜索" />
             </ListItem>
         </List>
       </Drawer>

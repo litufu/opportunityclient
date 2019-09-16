@@ -59,6 +59,14 @@ export default function ConditonSearch() {
       />
       <TextField
         id="standard-nowday"
+        label="报告基准日"
+        className={classes.textField}
+        value={endDate}
+        onChange={(event)=>setEndDate(event.target.value)}
+        margin="normal"
+      />
+      <TextField
+        id="standard-nowday"
         label="营业收入同比增长率(单季度)"
         className={classes.textField}
         value={qSalesYoy}
@@ -73,14 +81,7 @@ export default function ConditonSearch() {
         onChange={(event)=>setDtNetprofitYoy(event.target.value)}
         margin="normal"
       />
-      <TextField
-        id="standard-nowday"
-        label="报告基准日"
-        className={classes.textField}
-        value={endDate}
-        onChange={(event)=>setEndDate(event.target.value)}
-        margin="normal"
-      />
+      
       <Button 
       variant="contained" 
       className={classes.button}
@@ -96,9 +97,9 @@ export default function ConditonSearch() {
         查询
       </Button>
     </form>
-    {(data && data.listYearsCompanies) && (
+    {(data && data.conditionSearchCompanies) && (
                 <CompanyTable 
-                    companies={data.listYearsCompanies}
+                    companies={data.conditionSearchCompanies}
                 />)
             }
     </div>
