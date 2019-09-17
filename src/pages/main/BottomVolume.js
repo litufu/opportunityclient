@@ -37,6 +37,7 @@ export default function TextFields() {
   const [yesterday,setYesterday] = React.useState("")
   const [beforeDays,setBeforeDays] = React.useState(20)
   const [firstNum,setFirstNum] = React.useState(100)
+  const [direction,setDirection] = React.useState("up")
   const [resNum,setResNum] = React.useState(15)
   const [bottomVolume, { loading,error, data }] = useLazyQuery(GET_BOTTOMVOLUME);
     
@@ -92,6 +93,28 @@ export default function TextFields() {
         onChange={(event)=>setResNum(event.target.value)}
         margin="normal"
       />
+         <TextField
+        id="standard-select-currency-native"
+        select
+        label="放量/缩量"
+        className={classes.textField}
+        value={direction}
+        onChange={(event)=>setDirection(event.target.value)}
+        SelectProps={{
+          native: true,
+          MenuProps: {
+            className: classes.menu,
+          },
+        }}
+        margin="normal"
+      >
+          <option value={"up"}>
+            放量
+          </option>
+          <option value={"down"}>
+            缩量
+          </option>
+      </TextField>
       <Button 
       variant="contained" 
       className={classes.button}
@@ -101,7 +124,8 @@ export default function TextFields() {
             yesterday,
             beforeDays:parseInt(beforeDays),
             firstNum:parseInt(firstNum),
-            resNum:parseInt(resNum)
+            resNum:parseInt(resNum),
+            direction,
         }})}
         }
       >

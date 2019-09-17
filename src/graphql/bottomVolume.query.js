@@ -8,6 +8,7 @@ const GET_BOTTOMVOLUME = gql`
       $beforeDays:Int
       $firstNum:Int
       $resNum:Int
+      $direction:String
     ){
         bottomVolume(
           nowDay:$nowDay
@@ -15,6 +16,7 @@ const GET_BOTTOMVOLUME = gql`
           beforeDays:$beforeDays
           firstNum:$firstNum
           resNum:$resNum
+          direction:$direction
           ){
           ...CompanyFragment
         }

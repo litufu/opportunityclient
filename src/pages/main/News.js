@@ -40,6 +40,16 @@ export default function OutlinedChips() {
         个股公告
       </Link>
         </ListItem>
+        <ListItem button>
+        <Link 
+        href={"http://data.eastmoney.com/report/stock.jshtml"} 
+        className={classes.link}
+        rel="noopener"
+        target="_blank"
+        >
+        个股研报
+      </Link>
+        </ListItem>
         <ListItem>
           <Typography>煤炭：</Typography>
         <Link 
